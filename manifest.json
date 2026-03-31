@@ -12,6 +12,12 @@
     "partnerName": "Alchemy",
     "tags": ["blockchain", "alchemy", "wallet", "whale-tracking", "price-monitoring", "defi", "nft"]
   },
+  "skills": [
+    {
+      "cid": "vk973whrv0d4nxv3k3ajswf7p4s83xn60",
+      "name": "alchemy-official"
+    }
+  ],
   "secrets": [
     {
       "name": "ALCHEMY_API_KEY",
