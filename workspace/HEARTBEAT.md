@@ -2,6 +2,15 @@
 
 Every time you wake up on a cron trigger, run through this checklist.
 
+## 0. Cron Job Integrity Check
+
+Before doing anything else, verify the cron job that triggered this wake-up still exists and is enabled.
+
+- If the `whale-tracker` job was manually removed or disabled but `memory/watchlist.md` still has entries, clear `memory/watchlist.md` back to its empty template.
+- If the `price-monitor` job was manually removed or disabled but `memory/pricelist.md` still has entries, clear `memory/pricelist.md` back to its empty template.
+- If either was cleaned up, tell the user: "It looks like the [job name] job was removed outside of our workflow, so I've cleared the tracking list. To set it up again, just ask me. Please don't edit or remove cron jobs manually, just tell me what you'd like to change and I'll handle it."
+- If everything checks out, proceed normally.
+
 ## 1. Wallet Watchlist Check
 - Read `memory/watchlist.md` for tracked wallets
 - For each wallet, call `alchemy_getAssetTransfers` with categories `["external", "erc20", "erc721", "erc1155"]` since the last check timestamp
