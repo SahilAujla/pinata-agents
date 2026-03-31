@@ -52,7 +52,7 @@ Or do it manually:
 ```bash
 cp .env.example .env
 # Fill in your API keys in .env
-openclaw agents add alchemy-agent --workspace .
+openclaw agents add alchemy-agent --workspace ./workspace
 openclaw gateway
 ```
 
@@ -77,40 +77,43 @@ See the [full list](https://www.alchemy.com/docs/reference/node-supported-chains
 
 ## Customization
 
-Edit `USER.md` to configure:
+Edit `workspace/USER.md` to configure:
 - Wallets to track
 - Tokens and NFT collections to monitor
 - Alert thresholds
 - Preferred chains
 
-## Cron Jobs
+## Scheduled Tasks
 
-Two pre-configured jobs run every 15 minutes:
+Two pre-configured tasks run every 15 minutes (defined in `manifest.json`):
 
-| Job | What It Does |
+| Task | What It Does |
 | --- | --- |
 | `whale-tracker` | Checks watchlist wallets for new transfer activity |
 | `price-monitor` | Checks tracked token/NFT prices for significant moves |
 
-Edit `cron/jobs.json` to adjust schedules or add new jobs.
+Edit the `tasks` array in `manifest.json` to adjust schedules or add new tasks.
 
 ## File Structure
 
 ```
-├── setup.sh          # One-command setup (prompts for keys, starts gateway)
-├── .env.example      # Template env vars
-├── openclaw.json     # Gateway configuration
-├── SOUL.md           # Agent personality
-├── AGENTS.md         # Operating rules and workflows
-├── BOOT.md           # First-run setup checklist
-├── HEARTBEAT.md      # Periodic monitoring tasks
-├── IDENTITY.md       # Agent name and branding
-├── USER.md           # Your preferences (customize this)
-├── skills/
-│   └── alchemy-api/  # Alchemy API skill with 82 reference docs
+├── manifest.json         # Agent config (name, secrets, tasks, template metadata)
+├── setup.sh              # One-command local setup (prompts for keys, starts gateway)
+├── .env.example          # Template env vars
+├── openclaw.json         # OpenClaw gateway configuration (for local dev)
 ├── cron/
-│   └── jobs.json     # Whale tracker + price monitor schedules
-└── memory/           # Runtime state (watchlists, price logs, daily reports)
+│   └── jobs.json         # OpenClaw cron store (for local dev)
+└── workspace/            # Agent workspace (mounted at runtime)
+    ├── AGENTS.md         # Operating rules and workflows
+    ├── SOUL.md           # Agent personality
+    ├── BOOT.md           # First-run setup checklist
+    ├── HEARTBEAT.md      # Periodic monitoring tasks
+    ├── IDENTITY.md       # Agent name and branding
+    ├── USER.md           # Your preferences (customize this)
+    ├── TOOLS.md          # Environment-specific notes
+    ├── skills/
+    │   └── alchemy-api/  # Alchemy API skill with 82 reference docs
+    └── memory/           # Runtime state (watchlists, price logs, daily reports)
 ```
 
 ## Requirements

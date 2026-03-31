@@ -138,7 +138,7 @@ else
 fi
 
 # ── 5. Create memory directory ───────────────────────────────────────────
-mkdir -p memory
+mkdir -p workspace/memory
 
 # ── 6. Set model based on LLM provider ─────────────────────────────────
 if [ -n "${ANTHROPIC_API_KEY:-}" ]; then
@@ -158,12 +158,12 @@ if openclaw agents list 2>&1 | grep -q "alchemy-agent"; then
   echo "✓ Agent 'alchemy-agent' already registered"
 else
   openclaw agents add alchemy-agent \
-    --workspace "$SCRIPT_DIR" \
+    --workspace "$SCRIPT_DIR/workspace" \
     --non-interactive \
     2>&1 || {
       echo ""
       echo "⚠ Could not auto-register agent. You can do it manually:"
-      echo "   openclaw agents add alchemy-agent --workspace $SCRIPT_DIR"
+      echo "   openclaw agents add alchemy-agent --workspace $SCRIPT_DIR/workspace"
     }
 fi
 
